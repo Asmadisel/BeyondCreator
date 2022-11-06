@@ -1,0 +1,222 @@
+﻿@model IEnumerable<BeyondCreator.Models.Character>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table" style="width:50%">
+    <thead>
+        <tr>
+            <th>
+                icon
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayersName)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Strenght)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dexterity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Perseption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Charisma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intellegence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vitality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Will)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lvl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Experience)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Advantage1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Advantage2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Advantage3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disadvantage1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disadvantage2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disadvantage3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profession1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profession2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profession3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeadArmour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BodyArmour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArmsArmour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LegsArmour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BonusArmour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src=~/lib/knight-icon-11.jpg style="width: 50px; height: 50px;" >
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Race)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayersName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Strenght)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dexterity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perseption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Charisma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intellegence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vitality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Will)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lvl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weapon1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weapon2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weapon3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Advantage1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Advantage2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Advantage3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disadvantage1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disadvantage2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disadvantage3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profession1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profession2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profession3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeadArmour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BodyArmour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArmsArmour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LegsArmour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BonusArmour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
