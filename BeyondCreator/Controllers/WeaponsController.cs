@@ -49,8 +49,10 @@ namespace BeyondCreator.Controllers
         // GET: Weapons/Create
         public IActionResult Create()
         {
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Name", "Name");
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Name", "Name");
+            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name");
+            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name");
+            //Добавляем сами новый viewdata со свойствами оружия
+            ViewData["WeaponPropertyId"] = new SelectList(_context.Set<WeaponProperty>(), "Id", "Name");
             return View();
         }
 
@@ -67,8 +69,8 @@ namespace BeyondCreator.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Id", weapon.DiceId);
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Id", weapon.WeaponMaterialId);
+            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name", weapon.DiceId);
+            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name", weapon.WeaponMaterialId);
             return View(weapon);
         }
 
@@ -85,8 +87,8 @@ namespace BeyondCreator.Controllers
             {
                 return NotFound();
             }
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Id", weapon.DiceId);
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Id", weapon.WeaponMaterialId);
+            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name", weapon.DiceId);
+            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name", weapon.WeaponMaterialId);
             return View(weapon);
         }
 
@@ -122,8 +124,8 @@ namespace BeyondCreator.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Id", weapon.DiceId);
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Id", weapon.WeaponMaterialId);
+            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name", weapon.DiceId);
+            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name", weapon.WeaponMaterialId);
             return View(weapon);
         }
 

@@ -31,8 +31,12 @@ namespace BeyondCreator.Models
         public int Experience { get; set; } = 0;
 
         //Оружие. Ограничено 3 элементами из РСУБД
-        [Display(Name = "Оружие")]
-        public List<Weapon> Weapons { get; set; } = new List<Weapon>();
+        [Display(Name = "Оружие 1")]
+        public string? Weapon1 { get; set; } = null;
+        [Display(Name = "Оружие 2")]
+        public string? Weapon2 { get; set; } = null;
+        [Display(Name = "Оружие 3")]
+        public string? Weapon3 { get; set; } = null;
 
         //Преимущества и недостатки. На данный момент ограничены 3 элементами каждый
         [Display(Name = "Преимущество №1")]

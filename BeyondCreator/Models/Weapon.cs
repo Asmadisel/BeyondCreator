@@ -41,6 +41,6 @@
         public List<WeaponProperty>? WeaponProperties { get; set; } = new();  
 
         //Отношение к персонажу
-        public ICollection<Character>? Characters { get; set; }
+        public List<Character> Characters { get; set; } = new();
     }
 }

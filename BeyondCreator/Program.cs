@@ -51,6 +51,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "Character_PDF", pattern: "{controller=Characters}/{action=Details}/{id?}");
 app.MapRazorPages();
 
 app.Run();

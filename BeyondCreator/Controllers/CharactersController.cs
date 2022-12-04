@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IronPdf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BeyondCreator.Data;
 using BeyondCreator.Models;
+using Microsoft.CodeAnalysis;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
+using Document = iTextSharp.text.Document;
 
 namespace BeyondCreator.Controllers
 {
@@ -22,7 +27,7 @@ namespace BeyondCreator.Controllers
         // GET: Characters
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Character.ToListAsync());
+            return View(await _context.Character.ToListAsync());
         }
 
         // GET: Characters/Details/5
@@ -148,14 +153,31 @@ namespace BeyondCreator.Controllers
             {
                 _context.Character.Remove(character);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CharacterExists(int id)
         {
-          return _context.Character.Any(e => e.Id == id);
+            return _context.Character.Any(e => e.Id == id);
         }
+
+        //Создаем документ Сохранения PDF файла
+
+       
+        [HttpPost]
+        //[Route("Characters/Details/{id?}")]
+        public ActionResult CreatePDFDocument()
+        {
+            var render = new IronPdf.ChromePdfRenderer();
+            render.RenderingOptions.PaperSize = IronPdf.Rendering.PdfPaperSize.A4;
+            render.RenderingOptions.ViewPortWidth= 1280;
+            var doc = render.RenderUrlAsPdf("https://metanit.com/sharp/aspnetmvc/2.2.php");
+            return File(doc.Stream.ToArray(), "application/pdf");
+
+        }
+
     }
 }
+   
