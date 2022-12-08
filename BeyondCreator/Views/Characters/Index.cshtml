@@ -215,6 +215,16 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>|
+                   
+                @{
+                        Html.BeginForm("CreatePDFDocument", "Characters", FormMethod.Get);
+                        {
+                            <div>
+                                <input type="submit" asp-action="CreatePDFDocument" asp-route-id="@item.Id" value="Generate PDF Document" style="width:150px;height:27px" />
+                            </div>
+                        }
+                        Html.EndForm();
+                    }
                     <!--  <a asp-action="CreatePDFDocument" asp-route-id="@item.Id">CreatePDFDocument</a>|-->
             </td>
                
