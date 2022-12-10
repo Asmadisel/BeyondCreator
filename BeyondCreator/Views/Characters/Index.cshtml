@@ -226,6 +226,15 @@
                         Html.EndForm();
                     }
                     <!--  <a asp-action="CreatePDFDocument" asp-route-id="@item.Id">CreatePDFDocument</a>|-->
+                    @{
+                        Html.BeginForm("CreatePDFDocument", "Characters", FormMethod.Get);
+                        {
+                            <div>
+                                <input type="submit" asp-action="CreatePDFDocument" asp-route-id="@item.Id" value="Generate PDF Document" style="width:150px;height:27px" />
+                            </div>
+                        }
+                        Html.EndForm();
+                    }
             </td>
                
         </tr>
