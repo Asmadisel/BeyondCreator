@@ -1,12 +1,12 @@
 ﻿@model BeyondCreator.Models.Character
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "CreatePDFDocument";
 }
 
-<h1>Details</h1>
+<h1>CreatePDFDocument</h1>
 
-<div style="height:500px; overflow-y: auto">
+<div>
     <h4>Character</h4>
     <hr />
     <dl class="row">
@@ -198,9 +198,7 @@
         </dd>
     </dl>
 </div>
-
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-
