@@ -193,12 +193,12 @@ namespace BeyondCreator.Controllers
                 return NotFound();
             }
 
-            
+
             //Указываем путь к файлу
             FileStream docStream = new FileStream("C:\\Users\\user\\source\\repos\\BeyondCreator\\BeyondCreator\\wwwroot\\Files\\PDF\\CharacterSheet.pdf", FileMode.Open, FileAccess.Read);
-             PdfLoadedDocument loadedDocument = new PdfLoadedDocument(docStream);
-             //loading
-             PdfLoadedForm form = loadedDocument.Form;
+            PdfLoadedDocument loadedDocument = new PdfLoadedDocument(docStream);
+            //loading
+            PdfLoadedForm form = loadedDocument.Form;
             //заполняем данные из файла
             //1 — атрибуты
             /* #region attrcheck
@@ -217,12 +217,12 @@ namespace BeyondCreator.Controllers
                   RaceCheck = character.Race.ToString();
               }
          #endregion */
-            
+
 
 
             (form.Fields["CharStrenght"] as PdfLoadedTextBoxField).Text = character.Strenght.ToString();
             (form.Fields["CharDexterity"] as PdfLoadedTextBoxField).Text = character.Dexterity.ToString() ?? " ";
-            (form.Fields["CharPerseption"] as PdfLoadedTextBoxField).Text = character.Perseption.ToString() ?? " " ;
+            (form.Fields["CharPerseption"] as PdfLoadedTextBoxField).Text = character.Perseption.ToString() ?? " ";
             (form.Fields["CharCharisma"] as PdfLoadedTextBoxField).Text = character.Charisma.ToString() ?? " ";
             (form.Fields["CharInteligence"] as PdfLoadedTextBoxField).Text = character.Intellegence.ToString() ?? " ";
             (form.Fields["CharVitality"] as PdfLoadedTextBoxField).Text = character.Vitality.ToString() ?? " ";
@@ -231,18 +231,18 @@ namespace BeyondCreator.Controllers
             (form.Fields["CharExp"] as PdfLoadedTextBoxField).Text = character.Experience.ToString() ?? " ";
             //Имя и раса
             //Проверка имени и расы
-           /* #region nameracecheck
-            string NameCheck = " ";
-            string RaceCheck = " ";
-            if (character.Name != null)
-            {
-                NameCheck = character.Name.ToString();
-            }
-            if (character.Race != null)
-            {
-                RaceCheck = character.Race.ToString();
-            }
-            #endregion */
+            /* #region nameracecheck
+             string NameCheck = " ";
+             string RaceCheck = " ";
+             if (character.Name != null)
+             {
+                 NameCheck = character.Name.ToString();
+             }
+             if (character.Race != null)
+             {
+                 RaceCheck = character.Race.ToString();
+             }
+             #endregion */
             (form.Fields["CharRace"] as PdfLoadedTextBoxField).Text = character.Race.ToString();
             (form.Fields["CharName"] as PdfLoadedTextBoxField).Text = character.Name.ToString();
             //Воля
@@ -271,7 +271,7 @@ namespace BeyondCreator.Controllers
              {
                  adv3 = character.Advantage3.ToString();
              }*/
-             #endregion 
+            #endregion
             (form.Fields["CharAdvantage1"] as PdfLoadedTextBoxField).Text = character.Advantage1.ToString();
             (form.Fields["CharAdvantage2"] as PdfLoadedTextBoxField).Text = character.Advantage2.ToString();
             (form.Fields["CharAdvantage3"] as PdfLoadedTextBoxField).Text = character.Advantage3.ToString();
@@ -303,19 +303,18 @@ namespace BeyondCreator.Controllers
             (form.Fields["CharProfession3"] as PdfLoadedTextBoxField).Text =character.Profession3.ToString();
             //Пишем документ в поток
             MemoryStream stream = new MemoryStream();
-              loadedDocument.Save(stream);
-              //Ставим позицию потока в 0
-              stream.Position = 0;
-              //Закрываем документ
-              loadedDocument.Close(true);
-              //Определяем тип контента для файла
-              string contentType = "application/pdf";
-              //Определяем имя файла
-              string filename = "Character.pdf";
-              //создаём FileContentResult
-              return File(stream, contentType, filename); 
+            loadedDocument.Save(stream);
+            //Ставим позицию потока в 0
+            stream.Position = 0;
+            //Закрываем документ
+            loadedDocument.Close(true);
+            //Определяем тип контента для файла
+            string contentType = "application/pdf";
+            //Определяем имя файла
+            string filename = "Character.pdf";
+            //создаём FileContentResult
+            return File(stream, contentType, filename);
         }
 
     }
 }
-   
