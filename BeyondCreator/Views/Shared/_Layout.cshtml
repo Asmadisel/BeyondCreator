@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeyondCreator.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Features-Image-images.css">
 </head>
 <body>
-    <header>
+    <header style="width: 100%;" >
         <nav class="navbar navbar-light navbar-expand-md py-3" style="background-color: rgb(33,37,41)">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon" style="background: var(--bs-navbar-brand-color);width: 50px;height: 50px;">
                         <img src="log.png " width="60" height="61"/>
-                    <a href="index.html"></a></span><span><a class="text-nowrap d-lg-flex nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" asp-area="" asp-controller="Home" asp-action="Index" style="color: white ;font-size: 24px;font-weight: bold;border-style: none;border-right-style: hidden;opacity: 0.60;--bs-dark: ;" title="GoTo"><strong>Beyond</strong></a></span></a>                <div id="navcol-1" class="collapse navbar-collapse d-lg-flex" style="margin-left: 27px;">
+                    <a href="index.html"></a></span><span><a class="text-nowrap d-lg-flex nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" asp-area="" asp-controller="Home" asp-action="Index" style="color: white ;font-size: 24px;font-weight: bold;border-style: none;border-right-style: hidden;opacity: 0.60;--bs-dark: ;" title="GoTo"><strong>Beyond</strong></a></span></a>                 <div id="navcol-1" class="collapse navbar-collapse d-lg-flex" style="margin-left: 27px;">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"></li>
                         <li class="nav-item"></li>
@@ -31,8 +32,8 @@
                             <div class="dropdown-menu" style="background: #1e2125;"><a id="headerItem1" class="dropdown-item" href="#" style="color: #ffffff;">First Item</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Second Item</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Third Item</a></div>
                         </li>
                         <li class="nav-item dropdown headerItem1" style="color: #ffffff;">
-                            <a class="dropdown-toggle nav-link headerItem1" style="color: whitesmoke;" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="/*color: #ffffff;*/">Библиотека</a>
-                            <div class="dropdown-menu headerItem1" style="background: #1e2125;color: #ffffff;"><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">First Item</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Second Item</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Third Item</a></div>
+                            <a class="dropdown-toggle nav-link headerItem1" style="color: whitesmoke;" aria-expanded="false" data-bs-toggle="dropdown"  style="/*color: #ffffff;*/">Библиотека</a>
+                            <div class="dropdown-menu headerItem1" style="background: #1e2125;color: #ffffff;"><a id="headerItem1" class="dropdown-item headerItem1" asp-controller="Map" asp-action="MainMap" style="color: #ffffff;">Карта Мира</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Second Item</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Third Item</a></div>
                         </li>
                         <li class="nav-item dropdown headerItem1" style="color: #ffffff;">
                             <a class="dropdown-toggle nav-link headerItem1" style="color: whitesmoke;" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="/*color: #ffffff;*/">Контакты</a>
@@ -43,23 +44,25 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+   
+    <div class="container" style="margin-bottom:200px">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+    
     <div style ="bottom:0;position: fixed; width:100%;">
     <footer id="footer" class="text-center bg-dark">
         <div class="container text-white py-4 py-lg-5">
             <ul class="list-inline">
-                <li class="list-inline-item me-4"><a class="link-light" href="#">Web design</a></li>
-                <li class="list-inline-item me-4"><a class="link-light" href="#">Development</a></li>
-                <li class="list-inline-item"><a class="link-light" href="#">Hosting</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="https://github.com/Asmadisel/BeyondCreator">GitHub</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="https://vk.com/asmadisaremellior">Разработчик</a></li>
+                    <li class="list-inline-item"><a class="link-light" href="https://vk.com/lansgaleon">Группа VK</a></li>
             </ul>
-            <ul class="list-inline">
+            <ul class="list-inline" style="height:auto">
                 <li class="list-inline-item me-4">
                     <svg class="bi bi-facebook text-light" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
+                            <path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93V15.07C2 20.67 3.33 22 8.93 22H15.07C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2M18.15 16.27H16.69C16.14 16.27 15.97 15.82 15 14.83C14.12 14 13.74 13.88 13.53 13.88C13.24 13.88 13.15 13.96 13.15 14.38V15.69C13.15 16.04 13.04 16.26 12.11 16.26C10.57 16.26 8.86 15.32 7.66 13.59C5.85 11.05 5.36 9.13 5.36 8.75C5.36 8.54 5.43 8.34 5.85 8.34H7.32C7.69 8.34 7.83 8.5 7.97 8.9C8.69 11 9.89 12.8 10.38 12.8C10.57 12.8 10.65 12.71 10.65 12.25V10.1C10.6 9.12 10.07 9.03 10.07 8.68C10.07 8.5 10.21 8.34 10.44 8.34H12.73C13.04 8.34 13.15 8.5 13.15 8.88V11.77C13.15 12.08 13.28 12.19 13.38 12.19C13.56 12.19 13.72 12.08 14.05 11.74C15.1 10.57 15.85 8.76 15.85 8.76C15.95 8.55 16.11 8.35 16.5 8.35H17.93C18.37 8.35 18.47 8.58 18.37 8.89C18.19 9.74 16.41 12.25 16.43 12.25C16.27 12.5 16.21 12.61 16.43 12.9C16.58 13.11 17.09 13.55 17.43 13.94C18.05 14.65 18.53 15.24 18.66 15.65C18.77 16.06 18.57 16.27 18.15 16.27Z"></path>
                     </svg>
                 </li>
                 <li class="list-inline-item me-4">
@@ -73,7 +76,7 @@
                     </svg>
                 </li>
             </ul>
-            <p class="text-muted mb-0">Copyright © 2022 Brand</p>
+            <p class="text-muted mb-0">Copyright © 2022 Lansgaleon </p>
         </div>
     </footer>
     </div>

@@ -1,0 +1,23 @@
+.fit-cover {
+  object-fit: cover;
+}
+
+.index_link {
+  color: #e60606;
+}
+
+.black_link {
+    background-color: white;
+    color: black;
+    border: 2px solid green;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.black_link:hover .black_link:active {
+        background-color: green;
+        color: white;
+
+}

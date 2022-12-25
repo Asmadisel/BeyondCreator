@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Views\Map\lanianiaart.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IronPDF" Version="2022.11.10347" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="itextsharp.xmlworker" Version="5.5.13.3" />
