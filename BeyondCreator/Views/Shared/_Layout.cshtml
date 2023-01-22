@@ -5,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BeyondCreator</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeyondCreator.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Features-Image-images.css">
+    
 </head>
 <body>
-    <header style="width: 100%;" >
+    <header style="width: auto;" >
         <nav class="navbar navbar-light navbar-expand-md py-3" style="background-color: rgb(33,37,41)">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon" style="background: var(--bs-navbar-brand-color);width: 50px;height: 50px;">
-                        <img src="log.png " width="60" height="61"/>
-                    <a href="index.html"></a></span><span><a class="text-nowrap d-lg-flex nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" asp-area="" asp-controller="Home" asp-action="Index" style="color: white ;font-size: 24px;font-weight: bold;border-style: none;border-right-style: hidden;opacity: 0.60;--bs-dark: ;" title="GoTo"><strong>Beyond</strong></a></span></a>                 <div id="navcol-1" class="collapse navbar-collapse d-lg-flex" style="margin-left: 27px;">
+                        <img src="~/Images/Log.png" width="60" height="61"/>
+                    <a href="index.html"></a></span><span><a class="text-nowrap d-lg-flex nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" asp-area="" asp-controller="Home" asp-action="Index" style="color: white ;font-size: 24px;font-weight: bold;border-style: none;border-right-style: hidden;opacity: 0.60;--bs-dark: ;" title="GoTo"><strong>Beyond</strong></a></span></a>
+                <!--Добавляем кнопку "Меню", по нажатию мы вызывает js скрипт по изменению div id="navcol-1" на class collapse navbar-collapse d-lg-flex show и hide соответственно-->
+                    <button class="navbar-toggler" data-bs-toggle="colllapse" data-bs-target="navcol-1" onclick="open_navcol_1()" style="background: #0d6efd">
+                        <span class="visually-hidden">Toggle Navigation</span>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="navcol-1" class="collapse navbar-collapse d-lg-flex" style="margin-left: 27px;display:no ">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"></li>
                         <li class="nav-item"></li>
@@ -39,7 +47,10 @@
                             <a class="dropdown-toggle nav-link headerItem1" style="color: whitesmoke;" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="/*color: #ffffff;*/">Контакты</a>
                             <div class="dropdown-menu headerItem1" style="background: #1e2125;color: #ffffff;"><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">First Item</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Second Item</a><a id="headerItem1" class="dropdown-item headerItem1" href="#" style="color: #ffffff;">Third Item</a></div>
                         </li>
-                    </ul><button class="btn btn-primary" type="button" style="margin-top: 9px;">Вход</button>
+                       
+                        
+                    </ul>
+                    <div style="position:relative; margin-right: 20px;"><partial name="_LoginPartial" /> </div>
                 </div>
             </div>
         </nav>
@@ -51,8 +62,8 @@
         </main>
     </div>
     
-    <div style ="bottom:0;position: fixed; width:100%;">
-    <footer id="footer" class="text-center bg-dark">
+    
+    <footer id="footer" class="text-center bg-dark" style=" position: fixed; width: 100%; bottom: 0;left: 0;">
         <div class="container text-white py-4 py-lg-5">
             <ul class="list-inline">
                     <li class="list-inline-item me-4"><a class="link-light" href="https://github.com/Asmadisel/BeyondCreator">GitHub</a></li>
@@ -79,7 +90,7 @@
             <p class="text-muted mb-0">Copyright © 2022 Lansgaleon </p>
         </div>
     </footer>
-    </div>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
