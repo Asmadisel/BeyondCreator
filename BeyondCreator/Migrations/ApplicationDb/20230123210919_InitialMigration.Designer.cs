@@ -4,16 +4,19 @@ using BeyondCreator.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BeyondCreator.Migrations
+namespace BeyondCreator.Migrations.ApplicationDb
 {
     [DbContext(typeof(BeyondCreatorContext))]
-    partial class BeyondCreatorContextModelSnapshot : ModelSnapshot
+    [Migration("20230123210919_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

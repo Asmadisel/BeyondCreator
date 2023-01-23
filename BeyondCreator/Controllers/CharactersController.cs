@@ -272,9 +272,9 @@ namespace BeyondCreator.Controllers
                  adv3 = character.Advantage3.ToString();
              }*/
             #endregion
-            (form.Fields["CharAdvantage1"] as PdfLoadedTextBoxField).Text = character.Advantage1.ToString();
-            (form.Fields["CharAdvantage2"] as PdfLoadedTextBoxField).Text = character.Advantage2.ToString();
-            (form.Fields["CharAdvantage3"] as PdfLoadedTextBoxField).Text = character.Advantage3.ToString();
+            (form.Fields["CharAdvantage1"] as PdfLoadedTextBoxField).Text = character.Advantage1?.ToString()  ?? " "; ;
+            (form.Fields["CharAdvantage2"] as PdfLoadedTextBoxField).Text = character.Advantage2?.ToString()  ?? " "; ;
+            (form.Fields["CharAdvantage3"] as PdfLoadedTextBoxField).Text = character.Advantage3?.ToString()  ?? " "; ;
             //Недостатки
             //Проверка недостатков
             /* #region disadvantages check
@@ -294,13 +294,13 @@ namespace BeyondCreator.Controllers
                  dis3 = character.Advantage3.ToString();
              }
              #endregion */
-            (form.Fields["CharDisadvantage1"] as PdfLoadedTextBoxField).Text = character.Disadvantage1.ToString();
-            (form.Fields["CharDisadvantage2"] as PdfLoadedTextBoxField).Text = character.Disadvantage2.ToString();
-            (form.Fields["CharDisadvantage3"] as PdfLoadedTextBoxField).Text = character.Disadvantage3.ToString();
+            (form.Fields["CharDisadvantage1"] as PdfLoadedTextBoxField).Text = character.Disadvantage1?.ToString()  ?? " "; ;
+            (form.Fields["CharDisadvantage2"] as PdfLoadedTextBoxField).Text = character.Disadvantage2?.ToString()  ?? " "; ;
+            (form.Fields["CharDisadvantage3"] as PdfLoadedTextBoxField).Text = character.Disadvantage3?.ToString()  ?? " "; ;
             //профессии
-            (form.Fields["CharProfession1"] as PdfLoadedTextBoxField).Text =character.Profession1.ToString();
-            (form.Fields["CharProfession2"] as PdfLoadedTextBoxField).Text =character.Profession2.ToString();
-            (form.Fields["CharProfession3"] as PdfLoadedTextBoxField).Text =character.Profession3.ToString();
+            (form.Fields["CharProfession1"] as PdfLoadedTextBoxField).Text =character.Profession1?.ToString()  ?? " "; ;
+            (form.Fields["CharProfession2"] as PdfLoadedTextBoxField).Text =character.Profession2?.ToString()  ?? " "; ;
+            (form.Fields["CharProfession3"] as PdfLoadedTextBoxField).Text =character.Profession3?.ToString()  ?? " "; ;
             //Пишем документ в поток
             MemoryStream stream = new MemoryStream();
             loadedDocument.Save(stream);

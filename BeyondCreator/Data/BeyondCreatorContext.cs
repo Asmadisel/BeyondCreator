@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BeyondCreator.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BeyondCreator.Data
 {
-    public class BeyondCreatorContext : DbContext
+    public class BeyondCreatorContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public BeyondCreatorContext(DbContextOptions<BeyondCreatorContext> options)
             : base(options)
