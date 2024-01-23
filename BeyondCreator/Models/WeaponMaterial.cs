@@ -9,9 +9,13 @@
         [Display(Name = "Уровень материала")]
         [Range(0,5)]
         public int MaterialLvl { get; set; }
-       
 
-       
+        //Связан с таблицей оружия
+        public ICollection<Weapon> Weapons { get; } =new List<Weapon>();
+
+
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
 
     }
 }

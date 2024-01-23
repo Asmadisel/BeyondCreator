@@ -1,8 +1,11 @@
 ﻿using BeyondCreator.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using BeyondCreator.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BeyondCreatorContext>(options =>
@@ -53,5 +56,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "Character_PDF", pattern: "{controller=Characters}/{action=Details}/{id?}");
 app.MapRazorPages();
+
+
 
 app.Run();
