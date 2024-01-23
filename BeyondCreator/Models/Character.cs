@@ -6,6 +6,7 @@ namespace BeyondCreator.Models
 {
     public class Character
     {
+        [Key]
         public int Id { get; set; }
         [Display(Name = "Имя персонажа")]
         public string? Name { get; set; } = null;

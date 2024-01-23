@@ -17,6 +17,6 @@
         [Display(Name = "Связанное оружие")]
         public ICollection<WeaponType> WeaponTypes { get; set; } = new List<WeaponType>();
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }
