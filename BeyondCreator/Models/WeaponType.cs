@@ -6,7 +6,7 @@ namespace BeyondCreator.Models
     public class WeaponType
     {
         [Key]
-        public int Id;
+        public int Id { get; set; }
         //Parent    - таблица от Оружия. В себе хранит кубик урона (связь с таблицей Dices), название Типа, Тип Урона (enum ), Свойство оружия (WeaponProperty), уровень доступности (enum), базовая цена, сложность крафта
         public int WeaponId { get; set; }
         //Ссылка на оружие. Производных типов может быть сколько угодно.
@@ -56,12 +56,12 @@ namespace BeyondCreator.Models
 
 
        //Инициализируем конструктор
-        public WeaponType(Weapon _weapon, Dice _dice, string _name, AttackType atkType, WeaponProperty weapProperty, AvailabilityLevel _availabilityLevel, int _basePrice) { 
-        WeaponId= _weapon.Id; Weapons.Add(_weapon);DiceId=_dice.Id; Dice = _dice; Name= _name; AttackType= atkType; WeaponProperties.Add(weapProperty);AvailabilityLevel= _availabilityLevel; BasePrice = _basePrice;
-            BaseCraftDifficulty = 18;
-        }
+        //public WeaponType(Weapon _weapon, Dice _dice, string _name, AttackType atkType, WeaponProperty weapProperty, AvailabilityLevel _availabilityLevel, int _basePrice) { 
+        //WeaponId= _weapon.Id; Weapons.Add(_weapon);DiceId=_dice.Id; Dice = _dice; Name= _name; AttackType= atkType; WeaponProperties.Add(weapProperty);AvailabilityLevel= _availabilityLevel; BasePrice = _basePrice;
+        //    BaseCraftDifficulty = 18;
+        //}
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 
     public enum AttackType

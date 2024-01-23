@@ -44,12 +44,8 @@ namespace BeyondCreator.Models
         public Character Character { get; set; } = null!;
 
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
-        public Weapon(string _name, WeaponType _weaponType, WeaponMaterial _material, Character _character)
-        {
-            Name = _name; WeaponTypeID = _weaponType.Id; WeaponType = _weaponType;WeaponProperties= new List<WeaponProperty>();WeaponMaterialId = _material.Id; WeaponMaterial = _material;
-            WeaponLvl = _material.MaterialLvl; Hardness =3; Durability = 3; CharacterID = _character.Id;Character = _character; Date = DateTime.Now;
-        }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BeyondCreator.Models;
+using Image = BeyondCreator.Models.Image;
 
 namespace BeyondCreator.Data
 {
@@ -19,7 +20,7 @@ namespace BeyondCreator.Data
         //Database.EnsureCreated();
         //}
       
-        public DbSet<BeyondCreator.Models.Character> Character { get; set; } = default!;
+        public DbSet<BeyondCreator.Models.Character> Characters { get; set; } = default!;
 
         public DbSet<BeyondCreator.Models.Weapon> Weapon { get; set; } = default!;
         //Все наборы данных связанных с материалом оружия 
@@ -35,6 +36,22 @@ namespace BeyondCreator.Data
         public DbSet<BeyondCreator.Models.Spell> Spells { get; } = null!;
         public DbSet<BeyondCreator.Models.Ritual> Rituals { get; } = null!;
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+        
+            modelBuilder.Entity<Character>().ToTable(nameof(Character));
+            modelBuilder.Entity<Weapon>().ToTable(nameof(Weapon));
+            modelBuilder.Entity<WeaponMaterial>().ToTable(nameof(WeaponMaterial));
+            modelBuilder.Entity<WeaponProperty>().ToTable(nameof(WeaponProperty));
+            modelBuilder.Entity<WeaponType>().ToTable(nameof(WeaponType));
+            modelBuilder.Entity<Image>().ToTable(nameof(Image));
+            modelBuilder.Entity<Thing>().ToTable(nameof(Thing));
+            modelBuilder.Entity<Armor>().ToTable(nameof(Armor));
+            modelBuilder.Entity<Dice>().ToTable(nameof(Dice));
+            modelBuilder.Entity<Spell>().ToTable(nameof(Spell));
+            modelBuilder.Entity<Ritual>().ToTable(nameof(Ritual));
+        }
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    Dice d4 = new Dice { Id=1, Name="D4", Weapons=null};

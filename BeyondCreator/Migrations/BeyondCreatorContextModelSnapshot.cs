@@ -17,7 +17,7 @@ namespace BeyondCreator.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -49,7 +49,7 @@ namespace BeyondCreator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Armors");
+                    b.ToTable("Armor", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.Character", b =>
@@ -102,6 +102,9 @@ namespace BeyondCreator.Migrations
                     b.Property<int>("HeadArmour")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Intellegence")
                         .HasColumnType("int");
 
@@ -143,26 +146,16 @@ namespace BeyondCreator.Migrations
                     b.Property<int>("Vitality")
                         .HasColumnType("int");
 
-                    b.Property<string>("Weapon1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Weapon2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Weapon3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("WeaponId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Will")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WeaponId");
+                    b.HasIndex("ImageId")
+                        .IsUnique()
+                        .HasFilter("[ImageId] IS NOT NULL");
 
-                    b.ToTable("Character");
+                    b.ToTable("Character", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.Dice", b =>
@@ -173,12 +166,36 @@ namespace BeyondCreator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Dices");
+                    b.ToTable("Dice", (string)null);
+                });
+
+            modelBuilder.Entity("BeyondCreator.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Image", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.Ritual", b =>
@@ -198,7 +215,7 @@ namespace BeyondCreator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rituals");
+                    b.ToTable("Ritual", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.Spell", b =>
@@ -218,7 +235,7 @@ namespace BeyondCreator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spells");
+                    b.ToTable("Spell", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.Thing", b =>
@@ -238,7 +255,7 @@ namespace BeyondCreator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Things");
+                    b.ToTable("Thing", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.Weapon", b =>
@@ -249,39 +266,40 @@ namespace BeyondCreator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DiceCount")
+                    b.Property<int>("CharacterID")
                         .HasColumnType("int");
 
-                    b.Property<int>("DiceId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Durability")
                         .HasColumnType("int");
 
-                    b.Property<int>("Firmness")
+                    b.Property<int>("Hardness")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("WeaponLvl")
+                        .HasColumnType("int");
 
                     b.Property<int>("WeaponMaterialId")
                         .HasColumnType("int");
 
-                    b.Property<int>("damageBonus")
+                    b.Property<int>("WeaponTypeID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DiceId");
+                    b.HasIndex("CharacterID");
 
                     b.HasIndex("WeaponMaterialId");
 
-                    b.ToTable("Weapon");
+                    b.HasIndex("WeaponTypeID");
+
+                    b.ToTable("Weapon", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.WeaponMaterial", b =>
@@ -292,6 +310,9 @@ namespace BeyondCreator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MaterialLvl")
                         .HasColumnType("int");
 
@@ -300,7 +321,7 @@ namespace BeyondCreator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WeaponMaterials");
+                    b.ToTable("WeaponMaterial", (string)null);
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.WeaponProperty", b =>
@@ -311,9 +332,14 @@ namespace BeyondCreator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DiceId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -321,7 +347,71 @@ namespace BeyondCreator.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WeaponProperties");
+                    b.HasIndex("DiceId");
+
+                    b.ToTable("WeaponProperty", (string)null);
+                });
+
+            modelBuilder.Entity("BeyondCreator.Models.WeaponType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AttackDist")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttackDistance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttackType")
+                        .HasColumnType("int")
+                        .HasColumnName("Attack_type");
+
+                    b.Property<int>("AvailabilityLevel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BaseCraftDifficulty")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BasePrice")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WeaponId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiceId");
+
+                    b.ToTable("WeaponType", (string)null);
+                });
+
+            modelBuilder.Entity("WeaponPropertyWeaponType", b =>
+                {
+                    b.Property<int>("WeaponPropertiesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeaponTypesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("WeaponPropertiesId", "WeaponTypesId");
+
+                    b.HasIndex("WeaponTypesId");
+
+                    b.ToTable("WeaponPropertyWeaponType");
                 });
 
             modelBuilder.Entity("WeaponWeaponProperty", b =>
@@ -341,28 +431,71 @@ namespace BeyondCreator.Migrations
 
             modelBuilder.Entity("BeyondCreator.Models.Character", b =>
                 {
-                    b.HasOne("BeyondCreator.Models.Weapon", null)
-                        .WithMany("Characters")
-                        .HasForeignKey("WeaponId");
+                    b.HasOne("BeyondCreator.Models.Image", "Image")
+                        .WithOne("Character")
+                        .HasForeignKey("BeyondCreator.Models.Character", "ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("BeyondCreator.Models.Weapon", b =>
                 {
-                    b.HasOne("BeyondCreator.Models.Dice", "Dice")
+                    b.HasOne("BeyondCreator.Models.Character", "Character")
                         .WithMany("Weapons")
-                        .HasForeignKey("DiceId")
+                        .HasForeignKey("CharacterID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BeyondCreator.Models.WeaponMaterial", "WeaponMaterial")
-                        .WithMany()
+                        .WithMany("Weapons")
                         .HasForeignKey("WeaponMaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Dice");
+                    b.HasOne("BeyondCreator.Models.WeaponType", "WeaponType")
+                        .WithMany("Weapons")
+                        .HasForeignKey("WeaponTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
 
                     b.Navigation("WeaponMaterial");
+
+                    b.Navigation("WeaponType");
+                });
+
+            modelBuilder.Entity("BeyondCreator.Models.WeaponProperty", b =>
+                {
+                    b.HasOne("BeyondCreator.Models.Dice", null)
+                        .WithMany("WeaponProperties")
+                        .HasForeignKey("DiceId");
+                });
+
+            modelBuilder.Entity("BeyondCreator.Models.WeaponType", b =>
+                {
+                    b.HasOne("BeyondCreator.Models.Dice", "Dice")
+                        .WithMany()
+                        .HasForeignKey("DiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dice");
+                });
+
+            modelBuilder.Entity("WeaponPropertyWeaponType", b =>
+                {
+                    b.HasOne("BeyondCreator.Models.WeaponProperty", null)
+                        .WithMany()
+                        .HasForeignKey("WeaponPropertiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BeyondCreator.Models.WeaponType", null)
+                        .WithMany()
+                        .HasForeignKey("WeaponTypesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WeaponWeaponProperty", b =>
@@ -380,14 +513,29 @@ namespace BeyondCreator.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BeyondCreator.Models.Dice", b =>
+            modelBuilder.Entity("BeyondCreator.Models.Character", b =>
                 {
                     b.Navigation("Weapons");
                 });
 
-            modelBuilder.Entity("BeyondCreator.Models.Weapon", b =>
+            modelBuilder.Entity("BeyondCreator.Models.Dice", b =>
                 {
-                    b.Navigation("Characters");
+                    b.Navigation("WeaponProperties");
+                });
+
+            modelBuilder.Entity("BeyondCreator.Models.Image", b =>
+                {
+                    b.Navigation("Character");
+                });
+
+            modelBuilder.Entity("BeyondCreator.Models.WeaponMaterial", b =>
+                {
+                    b.Navigation("Weapons");
+                });
+
+            modelBuilder.Entity("BeyondCreator.Models.WeaponType", b =>
+                {
+                    b.Navigation("Weapons");
                 });
 #pragma warning restore 612, 618
         }
