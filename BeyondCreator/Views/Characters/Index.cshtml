@@ -182,16 +182,45 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Resistance)
-            </td>
+            </td> 
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
-            <td>
+            @* <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <a class="black_link" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a class="black_link" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+                <td>
+                    <a class="black_link" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+                <td>
+
+                    @{
+                        Html.BeginForm("CreatePDFDocument", "Characters", FormMethod.Get);
+                        {
+                            <div>
+                                <button type="submit" asp-action="CreatePDFDocument" asp-route-id="@item.Id" value="Generate PDF Document" style="width:150px;height:27px">Generate PDF  </button>
+                            </div>
+                        }
+                        Html.EndForm();
+                    }
+
+                </td>
+            
         </tr>
+        
+                       
+                    
 }
     </tbody>
 </table>
