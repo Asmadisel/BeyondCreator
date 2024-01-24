@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\SeedData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Views\Map\lanianiaart.jpg" />
   </ItemGroup>
 

@@ -102,9 +102,6 @@ namespace BeyondCreator.Migrations
                     b.Property<int>("HeadArmour")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Intellegence")
                         .HasColumnType("int");
 
@@ -151,10 +148,6 @@ namespace BeyondCreator.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
-
                     b.ToTable("Character", (string)null);
                 });
 
@@ -166,7 +159,7 @@ namespace BeyondCreator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -266,9 +259,6 @@ namespace BeyondCreator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CharacterID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -282,22 +272,7 @@ namespace BeyondCreator.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WeaponLvl")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeaponMaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeaponTypeID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CharacterID");
-
-                    b.HasIndex("WeaponMaterialId");
-
-                    b.HasIndex("WeaponTypeID");
 
                     b.ToTable("Weapon", (string)null);
                 });
@@ -338,16 +313,11 @@ namespace BeyondCreator.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DiceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DiceId");
 
                     b.ToTable("WeaponProperty", (string)null);
                 });
@@ -382,160 +352,13 @@ namespace BeyondCreator.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DiceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WeaponId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DiceId");
-
                     b.ToTable("WeaponType", (string)null);
-                });
-
-            modelBuilder.Entity("WeaponPropertyWeaponType", b =>
-                {
-                    b.Property<int>("WeaponPropertiesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeaponTypesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WeaponPropertiesId", "WeaponTypesId");
-
-                    b.HasIndex("WeaponTypesId");
-
-                    b.ToTable("WeaponPropertyWeaponType");
-                });
-
-            modelBuilder.Entity("WeaponWeaponProperty", b =>
-                {
-                    b.Property<int>("WeaponPropertiesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeaponsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WeaponPropertiesId", "WeaponsId");
-
-                    b.HasIndex("WeaponsId");
-
-                    b.ToTable("WeaponWeaponProperty");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.Character", b =>
-                {
-                    b.HasOne("BeyondCreator.Models.Image", "Image")
-                        .WithOne("Character")
-                        .HasForeignKey("BeyondCreator.Models.Character", "ImageId");
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.Weapon", b =>
-                {
-                    b.HasOne("BeyondCreator.Models.Character", "Character")
-                        .WithMany("Weapons")
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BeyondCreator.Models.WeaponMaterial", "WeaponMaterial")
-                        .WithMany("Weapons")
-                        .HasForeignKey("WeaponMaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BeyondCreator.Models.WeaponType", "WeaponType")
-                        .WithMany("Weapons")
-                        .HasForeignKey("WeaponTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Character");
-
-                    b.Navigation("WeaponMaterial");
-
-                    b.Navigation("WeaponType");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.WeaponProperty", b =>
-                {
-                    b.HasOne("BeyondCreator.Models.Dice", null)
-                        .WithMany("WeaponProperties")
-                        .HasForeignKey("DiceId");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.WeaponType", b =>
-                {
-                    b.HasOne("BeyondCreator.Models.Dice", "Dice")
-                        .WithMany()
-                        .HasForeignKey("DiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dice");
-                });
-
-            modelBuilder.Entity("WeaponPropertyWeaponType", b =>
-                {
-                    b.HasOne("BeyondCreator.Models.WeaponProperty", null)
-                        .WithMany()
-                        .HasForeignKey("WeaponPropertiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BeyondCreator.Models.WeaponType", null)
-                        .WithMany()
-                        .HasForeignKey("WeaponTypesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WeaponWeaponProperty", b =>
-                {
-                    b.HasOne("BeyondCreator.Models.WeaponProperty", null)
-                        .WithMany()
-                        .HasForeignKey("WeaponPropertiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BeyondCreator.Models.Weapon", null)
-                        .WithMany()
-                        .HasForeignKey("WeaponsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.Character", b =>
-                {
-                    b.Navigation("Weapons");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.Dice", b =>
-                {
-                    b.Navigation("WeaponProperties");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.Image", b =>
-                {
-                    b.Navigation("Character");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.WeaponMaterial", b =>
-                {
-                    b.Navigation("Weapons");
-                });
-
-            modelBuilder.Entity("BeyondCreator.Models.WeaponType", b =>
-                {
-                    b.Navigation("Weapons");
                 });
 #pragma warning restore 612, 618
         }

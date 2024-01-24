@@ -13,6 +13,8 @@ namespace BeyondCreator.Data
         public BeyondCreatorContext(DbContextOptions<BeyondCreatorContext> options)
             : base(options)
         {
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
         //Блок удаляющий данные при созданни. Необходимо просто закомменить EnsureDeleted
         //public BeyondCreatorContext() {
@@ -24,21 +26,21 @@ namespace BeyondCreator.Data
 
         public DbSet<BeyondCreator.Models.Weapon> Weapon { get; set; } = default!;
         //Все наборы данных связанных с материалом оружия 
-        public DbSet<BeyondCreator.Models.WeaponMaterial> WeaponMaterials { get; } = null!;
-        public DbSet<BeyondCreator.Models.WeaponProperty> WeaponProperties { get; } = null!;
+        public DbSet<BeyondCreator.Models.WeaponMaterial> WeaponMaterials { get; set; } = null!;
+        public DbSet<BeyondCreator.Models.WeaponProperty> WeaponProperties { get; set; } = null!;
         public DbSet<BeyondCreator.Models.WeaponType> WeaponTypes { get; set; } = null!;
         //Картинки
         public DbSet<BeyondCreator.Models.Image> Images { get; set; }
-        public DbSet<BeyondCreator.Models.Thing> Things { get; } = null!;
-        public DbSet<BeyondCreator.Models.Armor> Armors { get; } = null!;
+        public DbSet<BeyondCreator.Models.Thing> Things { get; set; } = null!;
+        public DbSet<BeyondCreator.Models.Armor> Armors { get; set; } = null!;
         
-        public DbSet<BeyondCreator.Models.Dice> Dices { get; } = null!;
-        public DbSet<BeyondCreator.Models.Spell> Spells { get; } = null!;
-        public DbSet<BeyondCreator.Models.Ritual> Rituals { get; } = null!;
+        public DbSet<BeyondCreator.Models.Dice> Dices { get; set; } = null!;
+        public DbSet<BeyondCreator.Models.Spell> Spells { get; set; } = null!;
+        public DbSet<BeyondCreator.Models.Ritual> Rituals { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            base.OnModelCreating(modelBuilder);
         
             modelBuilder.Entity<Character>().ToTable(nameof(Character));
             modelBuilder.Entity<Weapon>().ToTable(nameof(Weapon));
@@ -52,6 +54,8 @@ namespace BeyondCreator.Data
             modelBuilder.Entity<Spell>().ToTable(nameof(Spell));
             modelBuilder.Entity<Ritual>().ToTable(nameof(Ritual));
         }
+
+        
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    Dice d4 = new Dice { Id=1, Name="D4", Weapons=null};

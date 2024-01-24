@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using BeyondCreator.Data;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeyondCreator.Models
@@ -8,30 +9,30 @@ namespace BeyondCreator.Models
         [Key]
         public int Id { get; set; }
         //Parent    - таблица от Оружия. В себе хранит кубик урона (связь с таблицей Dices), название Типа, Тип Урона (enum ), Свойство оружия (WeaponProperty), уровень доступности (enum), базовая цена, сложность крафта
-        public int WeaponId { get; set; }
-        //Ссылка на оружие. Производных типов может быть сколько угодно.
-        [Display(Name = "Оружия")]
-        public ICollection<Weapon> Weapons { get; } = new List<Weapon>();
-        //Связь 1 ко многим с типом оружия. Является зависимой от модели Dice
-        public int DiceId {  get; set; }
-        //[DefaultValue(Dice.Id(0)]
-        [Display(Name = "Куб урона")]
-        [Column("Attack_dice")]
-        public Dice Dice { get; set; } = null!;
+        //public int WeaponId { get; set; }
+        ////Ссылка на оружие. Производных типов может быть сколько угодно.
+
+        //public ICollection<Weapon> Weapons { get; set; } = new List<Weapon>();
+        ////Связь 1 ко многим с типом оружия. Является зависимой от модели Dice
+        //public int DiceId {  get; set; }
+        ////[DefaultValue(Dice.Id(0)]
+        //[Display(Name = "Куб урона")]
+        //[Column("Attack_dice")]
+        //public Dice? Dice { get; set; }
 
         //Название Типа
         [Display(Name = "Название")]
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = "Undefined";
         //Тип Урона
         [Column("Attack_type")]
         [Display(Name = "Тип урона")]
         [Required]
         public AttackType AttackType { get; set; }
 
-        //Свойства оружия - связь многие ко многим, является зависимым от WeaponProperty. Хранит в себе бесконечное количество свойств. 
-        [Display(Name = "Свойства оружия")]
-        public ICollection<WeaponProperty> WeaponProperties { get; set; } = new List<WeaponProperty>();
+        ////Свойства оружия - связь многие ко многим, является зависимым от WeaponProperty. Хранит в себе бесконечное количество свойств. 
+        //[Display(Name = "Свойства оружия")]
+        //public ICollection<WeaponProperty> WeaponProperties { get; set; } = new List<WeaponProperty>();
         //Уровень доступности
         [Display(Name = "Доступность")]
         [Required]

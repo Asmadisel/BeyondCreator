@@ -35,29 +35,29 @@ namespace BeyondCreator.Models
 
         //Оружие. Ограничено 3 элементами из РСУБД. Является отношением 1:M (1 герой может иметь множество оружия), коллекция может быть пустой. У оружия есть поле "Хозяин" и "Создатель"
 
-        [Display(Name = "Оружие")]
-        public ICollection<Weapon> Weapons { get; set; } = new List<Weapon>();
-        //Старая модель с 3 отдельными уникальными значениями оружия
         //[Display(Name = "Оружие")]
-        //public string? Weapon1 { get; set; } = null;
-        //[display(name = "оружие 2")]
-        //public string? weapon2 { get; set; } = null;
-        //[display(name = "оружие 3")]
-        //public string? weapon3 { get; set; } = null;
+        //public ICollection<Weapon> Weapons { get; set; } = new List<Weapon>();
+        ////Старая модель с 3 отдельными уникальными значениями оружия
+        ////[Display(Name = "Оружие")]
+        ////public string? Weapon1 { get; set; } = null;
+        ////[display(name = "оружие 2")]
+        ////public string? weapon2 { get; set; } = null;
+        ////[display(name = "оружие 3")]
+        ////public string? weapon3 { get; set; } = null;
         
-        //Базовая атака героя, равна по базе 1, если нет оружия, иначе - кубик+уровень материала
-        public string BaseAttack { get {
-                //Если нет значений
-                if(!Weapons.Any() )
-                {
-                    return "1+Strenght";
-                }
-                else
-                {
-                    var weap = Weapons.FirstOrDefault();
-                    return $"{weap.WeaponType.Dice.ToString}+{weap.WeaponLvl}+Strenght";
-                }
-            } }
+        ////Базовая атака героя, равна по базе 1, если нет оружия, иначе - кубик+уровень материала
+        //public string BaseAttack { get {
+        //        //Если нет значений
+        //        if(!Weapons.Any() )
+        //        {
+        //            return "1+Strenght";
+        //        }
+        //        else
+        //        {
+        //            var weap = Weapons.FirstOrDefault();
+        //            return $"{weap.WeaponType.Dice.ToString}+{weap.WeaponLvl}+Strenght";
+        //        }
+        //    } }
 
 
 
@@ -101,9 +101,9 @@ namespace BeyondCreator.Models
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        //Добавляем возможность добавления арта персонажа
-        public int? ImageId { get; set; }
-        public Image? Image { get; set; }
+        ////Добавляем возможность добавления арта персонажа
+        //public int? ImageId { get; set; }
+        //public Image? Image { get; set; }
 
     }
 }

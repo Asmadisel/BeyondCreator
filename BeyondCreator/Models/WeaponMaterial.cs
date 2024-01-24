@@ -11,8 +11,8 @@
         [Range(0,5)]
         public int MaterialLvl { get; set; }
 
-        //Связан с таблицей оружия
-        public ICollection<Weapon> Weapons { get; } =new List<Weapon>();
+        ////Связан с таблицей оружия
+        //public ICollection<Weapon> Weapons { get; set; } =new List<Weapon>();
 
 
         [DataType(DataType.Date)]

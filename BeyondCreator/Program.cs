@@ -1,7 +1,6 @@
 ﻿using BeyondCreator.Data;
 using Microsoft.EntityFrameworkCore;
 using BeyondCreator.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
@@ -30,7 +29,8 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<BeyondCreatorContext>();
-        SeedData.Initilize(context);
+        //context.Database.EnsureCreated();
+        DBInitializer.Initialize(context);
     }
     catch (Exception ex)
     {
@@ -45,6 +45,7 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
