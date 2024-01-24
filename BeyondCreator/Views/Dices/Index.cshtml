@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BeyondCreator.Models.Weapon>
+﻿@model IEnumerable<BeyondCreator.Models.Dice>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,12 +16,6 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hardness)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Durability)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th></th>
@@ -32,12 +26,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hardness)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Durability)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)

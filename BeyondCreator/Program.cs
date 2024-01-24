@@ -1,8 +1,10 @@
 ﻿using BeyondCreator.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using BeyondCreator.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BeyondCreatorContext>(options =>
@@ -24,14 +26,26 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<BeyondCreatorContext>();
+        //context.Database.EnsureCreated();
+        DBInitializer.Initialize(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
 
-    SeedData.Initilize(services);
+    
 }
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
@@ -53,5 +67,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "Character_PDF", pattern: "{controller=Characters}/{action=Details}/{id?}");
 app.MapRazorPages();
+
+
 
 app.Run();

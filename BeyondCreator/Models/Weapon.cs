@@ -1,46 +1,51 @@
-﻿namespace BeyondCreator.Models
+﻿using System.ComponentModel;
+
+namespace BeyondCreator.Models
 {
     public class Weapon
     {
-        //Типичное оружие в игре — сущность со своим уроном, материалом, своей прочностью, твёрдостью 
+        //Типичное оружие в игре — сущность со своим уроном, материалом, своей прочностью, твёрдостью и типом, обладающим системой свойств. 
+        //Хранит ссылку на WeaponType связи один ко многим (зависимое) и модифицируется уровнем, дополнительными свойствами
+        //Ключ по id
+        [Key]
         public int Id { get; set; }
+        //Задается пользователем, по умолчанию - weapon
         [Display(Name = "Название")]
         public string Name { get; set; } = "Weapon";
-        //На данный момент тип оружия вписывается. Нужна будет таблица с выбором типов. 
-        [Display(Name = "Тип")]
-        public string Type { get; set; } = "Sword";
-        //Один-ко-многим к выбору куба урона из таблицы "кубы"
+        ////Связь 1 к 1 с WeaponType. Type: Мечи, Топоры, Молоты/Булавы, Серпы/Косы, Копья, Кинжалы/Ножи, Плети, Луки, Арбалеты, Огнестрельное, Метательное, Безоружный Бой, Импровизируемое, Архаичное. 
+        ////От типа оружия передается: Тип урона, Свойства
+        ////Связь от одного типа может наследоваться множество оружий
+        //public int WeaponTypeID { get; set; }
+        //public WeaponType? WeaponType { get; set; }
 
-        [Display(Name = "Куб урона")]
-        public int DiceId { get; set; }
-        
-        public Dice? Dice { get; set; }
+        ////Связь отдельно с WeaponProperty как дополнительные свойства
+        //[Display(Name = "Дополнительные свойства")]
+        //public ICollection<WeaponProperty> WeaponProperties { get; set; } = new List<WeaponProperty>();
 
-        //Количество кубиков урона. Позже необходимо сделать привязку к размеру существа
-        [Display(Name = "Количество кубов")]
-        [Range(1, 5)]
-        public int DiceCount { get; set; } = 1;
 
-        //Материал — связь один к одному. 
-        [Display(Name = "Материал оружия")]
-        public int WeaponMaterialId { get; set; }
-        
-        public WeaponMaterial? WeaponMaterial { get; set; }
-        //По идее, в приложении выводить параметры прочности и твёрдости можно через представления, как Material.Durability и Material.Firmness
-        //Указать во время создания объекта значение бонуса нельзя — оно всегда равно уровню материала
-        [Display(Name = "Бонус урона")]
-        public int damageBonus { get; set; }
+        ////Связь с материалом оружия, связь типа один ко многим, является зависимым. От него зависят свойства  прочности и  enum AvailabilityLevel в WeaponType
+        //public int WeaponMaterialId {  get; set; }
+        //public WeaponMaterial WeaponMaterial { get; set; } = null!;
+        //[Display(Name = "Уровень предмета")]
+        ////Полностью зависит от материала предмета и свойство меняется у материала (=value)
+        //public int WeaponLvl { get => WeaponMaterial.MaterialLvl; set => WeaponMaterial.MaterialLvl= value; }
 
-        //Прочность материала увеличивается как факториал 
-        [Display(Name = "Прочность")]
-        public int Durability { get; set; }
+        //Твердость и прочность, по умолчанию 3/ 
 
-        [Display(Name = "Твердость")]
-        public int Firmness { get; set; }
-        //Список со свойствами оружия связь типа многие ко многим
-        public List<WeaponProperty>? WeaponProperties { get; set; } = new();  
+        //Нужно будет доработать логику автоматического set от materiallvl
+        public int Hardness { get; set; } = 3;
+        public int Durability { get ; set; } = 3;
 
-        //Отношение к персонажу
-        public List<Character> Characters { get; set; } = new();
+        ////Отношение к персонажу (Depended to Character) Один ко многим, где является зависимым
+        //public int CharacterID {  get; set; } //Необходимый внешний ключ
+        //[Display(Name = "Владелец")]
+        //[DefaultValue("Ничей")]
+        //[Required]
+        //public Character Character { get; set; } = null!;
+
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; } = DateTime.Now;
+
+
     }
 }

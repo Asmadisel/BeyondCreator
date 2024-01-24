@@ -4,17 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Characters</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table" style="width:50%">
+<table class="table">
     <thead>
-        <tr style="width:auto;">
-            <th>
-                icon
-            </th>
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -24,8 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PlayersName)
             </th>
-            
-           <!-- <th>
+            <th>
                 @Html.DisplayNameFor(model => model.Strenght)
             </th>
             <th>
@@ -40,7 +36,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Intellegence)
             </th>
-            -->
             <th>
                 @Html.DisplayNameFor(model => model.Vitality)
             </th>
@@ -52,16 +47,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Experience)
-            </th>
-            <!--
-            <th>
-                @Html.DisplayNameFor(model => model.Weapon1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weapon2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weapon3)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Advantage1)
@@ -81,7 +66,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Disadvantage3)
             </th>
-              -->
             <th>
                 @Html.DisplayNameFor(model => model.Profession1)
             </th>
@@ -91,7 +75,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Profession3)
             </th>
-            <!--
             <th>
                 @Html.DisplayNameFor(model => model.HeadArmour)
             </th>
@@ -110,19 +93,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Resistance)
             </th>
-            -->
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
-            <th style="width: 100px;"></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                <img src=~/lib/knight-icon-11.jpg style="width: 50px; height: 50px;" >
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -132,7 +111,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PlayersName)
             </td>
-              <!--
             <td>
                 @Html.DisplayFor(modelItem => item.Strenght)
             </td>
@@ -147,7 +125,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Intellegence)
-                </td> -->
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Vitality)
             </td>
@@ -159,16 +137,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Experience)
-            </td>
-                <!--
-            <td>
-                @Html.DisplayFor(modelItem => item.Weapon1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weapon2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weapon3)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Advantage1)
@@ -187,8 +155,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Disadvantage3)
-            </td> 
-                 -->
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Profession1)
             </td>
@@ -198,7 +165,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Profession3)
             </td>
-                <!--
             <td>
                 @Html.DisplayFor(modelItem => item.HeadArmour)
             </td>
@@ -217,33 +183,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Resistance)
             </td>
-                -->
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a class="black_link"  asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                </td>
-                <td>
-                    <a class="black_link"  asp-action="Details" asp-route-id="@item.Id">Details</a> 
-                </td>
-                <td>
-                    <a class="black_link" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-                <td>
-                   
-                @{
-                        Html.BeginForm("CreatePDFDocument", "Characters", FormMethod.Get);
-                        {
-                                    <div>
-                                        <button type="submit" asp-action="CreatePDFDocument" asp-route-id="@item.Id" value="Generate PDF Document" style="width:150px;height:27px">Generate PDF  </button>
-                                    </div>
-                        }
-                        Html.EndForm();
-                    }
-               
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
-               
         </tr>
 }
     </tbody>

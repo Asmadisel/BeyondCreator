@@ -10,22 +10,23 @@ using BeyondCreator.Models;
 
 namespace BeyondCreator.Controllers
 {
-    public class CharactersController : Controller
+    public class DicesController : Controller
     {
         private readonly BeyondCreatorContext _context;
 
-        public CharactersController(BeyondCreatorContext context)
+        public DicesController(BeyondCreatorContext context)
         {
             _context = context;
         }
 
-        // GET: Characters
+        // GET: Dices
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Characters.ToListAsync());
+            var x = await _context.Dices.ToListAsync();
+            return View(await _context.Dices.ToListAsync());
         }
 
-        // GET: Characters/Details/5
+        // GET: Dices/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,39 @@ namespace BeyondCreator.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Characters
+            var dice = await _context.Dices
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (character == null)
+            if (dice == null)
             {
                 return NotFound();
             }
 
-            return View(character);
+            return View(dice);
         }
 
-        // GET: Characters/Create
+        // GET: Dices/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Characters/Create
+        // POST: Dices/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Race,PlayersName,Strenght,Dexterity,Perseption,Charisma,Intellegence,Vitality,Will,Lvl,Experience,Advantage1,Advantage2,Advantage3,Disadvantage1,Disadvantage2,Disadvantage3,Profession1,Profession2,Profession3,HeadArmour,BodyArmour,ArmsArmour,LegsArmour,BonusArmour,Resistance,Date")] Character character)
+        public async Task<IActionResult> Create([Bind("Id,Name,Date")] Dice dice)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(character);
+                _context.Add(dice);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(character);
+            return View(dice);
         }
 
-        // GET: Characters/Edit/5
+        // GET: Dices/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +74,22 @@ namespace BeyondCreator.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Characters.FindAsync(id);
-            if (character == null)
+            var dice = await _context.Dices.FindAsync(id);
+            if (dice == null)
             {
                 return NotFound();
             }
-            return View(character);
+            return View(dice);
         }
 
-        // POST: Characters/Edit/5
+        // POST: Dices/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Race,PlayersName,Strenght,Dexterity,Perseption,Charisma,Intellegence,Vitality,Will,Lvl,Experience,Advantage1,Advantage2,Advantage3,Disadvantage1,Disadvantage2,Disadvantage3,Profession1,Profession2,Profession3,HeadArmour,BodyArmour,ArmsArmour,LegsArmour,BonusArmour,Resistance,Date")] Character character)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date")] Dice dice)
         {
-            if (id != character.Id)
+            if (id != dice.Id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace BeyondCreator.Controllers
             {
                 try
                 {
-                    _context.Update(character);
+                    _context.Update(dice);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CharacterExists(character.Id))
+                    if (!DiceExists(dice.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +114,10 @@ namespace BeyondCreator.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(character);
+            return View(dice);
         }
 
-        // GET: Characters/Delete/5
+        // GET: Dices/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +125,34 @@ namespace BeyondCreator.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Characters
+            var dice = await _context.Dices
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (character == null)
+            if (dice == null)
             {
                 return NotFound();
             }
 
-            return View(character);
+            return View(dice);
         }
 
-        // POST: Characters/Delete/5
+        // POST: Dices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var character = await _context.Characters.FindAsync(id);
-            if (character != null)
+            var dice = await _context.Dices.FindAsync(id);
+            if (dice != null)
             {
-                _context.Characters.Remove(character);
+                _context.Dices.Remove(dice);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CharacterExists(int id)
+        private bool DiceExists(int id)
         {
-            return _context.Characters.Any(e => e.Id == id);
+            return _context.Dices.Any(e => e.Id == id);
         }
     }
 }

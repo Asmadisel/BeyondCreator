@@ -6,7 +6,7 @@
 
 <h1>Details</h1>
 
-<div style="height:auto; overflow-y: auto">
+<div>
     <h4>Character</h4>
     <hr />
     <dl class="row">
@@ -81,24 +81,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Experience)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weapon1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weapon1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weapon2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weapon2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weapon3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weapon3)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Advantage1)
@@ -198,9 +180,7 @@
         </dd>
     </dl>
 </div>
-
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-

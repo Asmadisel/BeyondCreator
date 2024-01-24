@@ -1,4 +1,4 @@
-﻿@model BeyondCreator.Models.Weapon
+﻿@model BeyondCreator.Models.Dice
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Weapon</h4>
+    <h4>Dice</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -15,18 +15,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Hardness)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Hardness)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Durability)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Durability)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Date)

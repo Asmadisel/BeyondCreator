@@ -22,21 +22,18 @@ namespace BeyondCreator.Controllers
         // GET: Weapons
         public async Task<IActionResult> Index()
         {
-            var beyondCreatorContext = _context.Weapon.Include(w => w.Dice).Include(w => w.WeaponMaterial);
-            return View(await beyondCreatorContext.ToListAsync());
+            return View(await _context.Weapon.ToListAsync());
         }
 
         // GET: Weapons/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Weapon == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var weapon = await _context.Weapon
-                .Include(w => w.Dice)
-                .Include(w => w.WeaponMaterial)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (weapon == null)
             {
@@ -49,10 +46,6 @@ namespace BeyondCreator.Controllers
         // GET: Weapons/Create
         public IActionResult Create()
         {
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name");
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name");
-            //Добавляем сами новый viewdata со свойствами оружия
-            ViewData["WeaponPropertyId"] = new SelectList(_context.Set<WeaponProperty>(), "Id", "Name");
             return View();
         }
 
@@ -61,7 +54,7 @@ namespace BeyondCreator.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Type,DiceId,DiceCount,WeaponMaterialId,damageBonus,Durability,Firmness")] Weapon weapon)
+        public async Task<IActionResult> Create([Bind("Id,Name,Hardness,Durability,Date")] Weapon weapon)
         {
             if (ModelState.IsValid)
             {
@@ -69,15 +62,13 @@ namespace BeyondCreator.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name", weapon.DiceId);
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name", weapon.WeaponMaterialId);
             return View(weapon);
         }
 
         // GET: Weapons/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Weapon == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -87,8 +78,6 @@ namespace BeyondCreator.Controllers
             {
                 return NotFound();
             }
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name", weapon.DiceId);
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name", weapon.WeaponMaterialId);
             return View(weapon);
         }
 
@@ -97,7 +86,7 @@ namespace BeyondCreator.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,DiceId,DiceCount,WeaponMaterialId,damageBonus,Durability,Firmness")] Weapon weapon)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Hardness,Durability,Date")] Weapon weapon)
         {
             if (id != weapon.Id)
             {
@@ -124,22 +113,18 @@ namespace BeyondCreator.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DiceId"] = new SelectList(_context.Set<Dice>(), "Id", "Name", weapon.DiceId);
-            ViewData["WeaponMaterialId"] = new SelectList(_context.Set<WeaponMaterial>(), "Id", "Name", weapon.WeaponMaterialId);
             return View(weapon);
         }
 
         // GET: Weapons/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Weapon == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var weapon = await _context.Weapon
-                .Include(w => w.Dice)
-                .Include(w => w.WeaponMaterial)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (weapon == null)
             {
@@ -154,23 +139,19 @@ namespace BeyondCreator.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Weapon == null)
-            {
-                return Problem("Entity set 'BeyondCreatorContext.Weapon'  is null.");
-            }
             var weapon = await _context.Weapon.FindAsync(id);
             if (weapon != null)
             {
                 _context.Weapon.Remove(weapon);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool WeaponExists(int id)
         {
-          return _context.Weapon.Any(e => e.Id == id);
+            return _context.Weapon.Any(e => e.Id == id);
         }
     }
 }
